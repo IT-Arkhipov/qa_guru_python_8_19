@@ -521,3 +521,28 @@ list_resource = {
     "support"
   ]
 }
+
+created_user = {
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "createdAt": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "job": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "createdAt",
+    "id",
+    "job",
+    "name"
+  ]
+}
