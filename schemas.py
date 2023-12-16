@@ -259,3 +259,56 @@ list_users = {
     "support"
   ]
 }
+
+resource = {
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pantone_value": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "color",
+        "id",
+        "name",
+        "pantone_value",
+        "year"
+      ]
+    },
+    "support": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "url"
+      ]
+    }
+  },
+  "required": [
+    "data",
+    "support"
+  ]
+}
