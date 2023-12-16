@@ -68,3 +68,58 @@ class TestPostCreateUser:
         # then
         assert response.json().get('name') == new_user.get('name')
         assert response.json().get('job') == new_user.get('job')
+
+
+class TestPostRegister:
+    endpoint = '/api/register'
+
+    def test_post_register_response_code_200(self):
+        # given
+        url = utils.base_url + self.endpoint
+        expected_code = 200
+        credentials = {
+            "email": "eve.holt@reqres.in",
+            "password": "pistol"
+        }
+        # when
+        response = requests.post(url, json=credentials)
+        # then
+        assert response.status_code == expected_code
+
+    def test_post_register_missed_password(self):
+        # given
+        url = utils.base_url + self.endpoint
+        expected_code = 400
+        credentials = {
+            "email": "eve.holt@reqres.in",
+        }
+        # when
+        response = requests.post(url, json=credentials)
+        # then
+        assert response.status_code == expected_code
+        assert response.json().get('error') == 'Missing password'
+
+    def test_post_register_missed_email(self):
+        # given
+        url = utils.base_url + self.endpoint
+        expected_code = 400
+        credentials = {
+            "password": "pistol"
+        }
+        # when
+        response = requests.post(url, json=credentials)
+        # then
+        assert response.status_code == expected_code
+        assert response.json().get('error') == 'Missing email or username'
+
+    def test_post_register_response_structure(self):
+        # given
+        url = utils.base_url + self.endpoint
+        credentials = {
+            "email": "eve.holt@reqres.in",
+            "password": "pistol"
+        }
+        # when
+        response = requests.post(url, json=credentials)
+        # then
+        jsonschema.validate(response.json(), schemas.registered_user)
