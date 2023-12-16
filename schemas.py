@@ -576,3 +576,24 @@ login_user = {
     "token"
   ]
 }
+
+update_user = {
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "job": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "job",
+    "name",
+    "updatedAt"
+  ]
+}
