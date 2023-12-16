@@ -64,22 +64,52 @@ class TestGetUser:
         response = requests.get(url)
         # then
         jsonschema.validate(response.json(), schemas.user)
+        
 
-
-class TestGetSingleResource:
+class TestGetListResource:
     endpoint = '/api/unknown'
 
-    def test_get_user_number_response_code_200(self):
+    def test_get_list_resource_response_code_200(self):
         # given
-        user_number = 2
-        url = utils.base_url + self.endpoint + f"/{user_number}"
+        url = utils.base_url + self.endpoint
         expected_code = 200
         # when
         response = requests.get(url)
         # then
         assert response.status_code == expected_code
 
-    def test_get_user_wrong_user_number(self):
+    def test_get_list_resource_wrong_endpoint(self):
+        # given
+        url = utils.base_url + self.endpoint + '/all'
+        expected_code = 404
+        # when
+        response = requests.get(url)
+        # then
+        assert response.status_code == expected_code
+
+    def test_get_list_resource_response_structure(self):
+        # given
+        url = utils.base_url + self.endpoint
+        # when
+        response = requests.get(url)
+        # then
+        jsonschema.validate(response.json(), schemas.list_resource)
+
+
+class TestGetSingleResource:
+    endpoint = '/api/unknown'
+
+    def test_get_resource_number_response_code_200(self):
+        # given
+        resource_number = 2
+        url = utils.base_url + self.endpoint + f"/{resource_number}"
+        expected_code = 200
+        # when
+        response = requests.get(url)
+        # then
+        assert response.status_code == expected_code
+
+    def test_get_resource_wrong_resource_number(self):
         # given
         url = utils.base_url + self.endpoint + '/100'
         expected_code = 404
@@ -88,10 +118,10 @@ class TestGetSingleResource:
         # then
         assert response.status_code == expected_code
 
-    def test_get_user_response_structure(self):
+    def test_get_resource_response_structure(self):
         # given
-        user_number = 2
-        url = utils.base_url + self.endpoint + f"/{user_number}"
+        resource_number = 2
+        url = utils.base_url + self.endpoint + f"/{resource_number}"
         # when
         response = requests.get(url)
         # then
