@@ -64,7 +64,20 @@ class TestGetUser:
         response = requests.get(url)
         # then
         jsonschema.validate(response.json(), schemas.user)
-        
+
+    def test_get_user_check_all_users(self):
+        # given
+        expected_code = 200
+        url = utils.base_url + self.endpoint
+        # when
+        response = requests.get(url)
+        users_quantity = response.json().get('total')
+        # then
+        for user_number in range(1, users_quantity):
+            url = utils.base_url + self.endpoint + f"/{user_number}"
+            response = requests.get(url)
+            assert response.status_code == expected_code
+
 
 class TestGetListResource:
     endpoint = '/api/unknown'
