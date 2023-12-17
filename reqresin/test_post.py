@@ -33,8 +33,8 @@ class TestPostCreateUser:
 
     def test_post_create_user_wrong_endpoint(self):
         # given
-        url = utils.base_url + self.endpoint + '/wrong_endpoint'
-        expected_code = 201
+        url = utils.base_url + '/wrong_endpoint'
+        expected_code = 404
         new_user = {
             "name": "morpheus",
             "job": "leader"

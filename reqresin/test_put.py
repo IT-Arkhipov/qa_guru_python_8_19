@@ -35,6 +35,19 @@ class TestPutUser:
         # then
         jsonschema.validate(response.json(), schemas.update_user)
 
+    def test_put_user_number_wrong_endpoint(self):
+        # given
+        expected_code = 404
+        user = {
+            "name": "morpheus",
+            "job": "zion resident"
+        }
+        url = utils.base_url + '/wrong_endpoint'
+        # when
+        response = requests.put(url, json=user)
+        # then
+        assert response.status_code == expected_code
+
     def test_put_user_check_update_date(self):
         # given
         user_number = 2
@@ -49,5 +62,3 @@ class TestPutUser:
         # then
         assert (response.json().get('updatedAt').split('T')[0] ==
                 str(datetime.datetime.now() - datetime.timedelta(hours=3)).split()[0])
-
-

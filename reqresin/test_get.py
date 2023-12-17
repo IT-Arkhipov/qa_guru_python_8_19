@@ -80,7 +80,7 @@ class TestGetListResource:
 
     def test_get_list_resource_wrong_endpoint(self):
         # given
-        url = utils.base_url + self.endpoint + '/all'
+        url = utils.base_url + '/wrong_endpoint'
         expected_code = 404
         # when
         response = requests.get(url)
