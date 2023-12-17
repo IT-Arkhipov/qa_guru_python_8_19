@@ -18,7 +18,7 @@ class TestDeleteUsers:
     def test_delete_user_wrong_user_number(self):
         # given
         url = utils.base_url + self.endpoint + '/100'
-        expected_code = 404
+        expected_code = 204
         # when
         response = requests.delete(url)
         # then

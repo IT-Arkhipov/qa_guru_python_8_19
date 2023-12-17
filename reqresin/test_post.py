@@ -1,6 +1,5 @@
 import jsonschema
 import requests
-
 import schemas
 import utils
 

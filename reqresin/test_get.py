@@ -1,7 +1,7 @@
 import requests
 import schemas
-import utils
 import jsonschema
+import utils
 
 
 class TestGetListUsers:
